@@ -15,49 +15,60 @@
         .school-name { font-weight: 600; color: #555; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Form Styling */
-        .section-title { font-size: 14px; font-weight: bold; color: #1e3a8a; border-bottom: 2px solid #e0e7ff; padding-bottom: 5px; margin-top: 20px; margin-bottom: 15px; }
+        .section-title { font-size: 14px; font-weight: bold; color: #1e3a8a; border-bottom: 2px solid #e0e7ff; padding-bottom: 5px; margin-top: 25px; margin-bottom: 15px; }
         
-        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
-        .col-full { flex: 1; }
+        .form-row { display: flex; gap: 15px; margin-bottom: 15px; width: 100%; }
+        
+        /* Layout Columns */
+        .col-full { width: 100%; }
         .col-half { flex: 1; }
-        .col-small { flex: 0.4; } 
+        .col-small { flex: 0.3; min-width: 80px; } 
 
-        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; color: #444; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #444; }
         
-        /* Input Styling */
+        /* Input Styling - Pastikan 100% lebar */
         input[type="text"], input[type="time"] {
-            width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; /* Font besar sikit */
-            background-color: #f8fafc; transition: 0.3s; box-sizing: border-box;
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            font-size: 16px; /* Font besar mudah baca */
+            background-color: #f8fafc; 
+            box-sizing: border-box; /* Pastikan padding tak kacau lebar */
         }
         input:focus { border-color: #3b82f6; outline: none; background-color: #fff; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
         input[readonly] { background-color: #e2e8f0; color: #64748b; border-color: #e2e8f0; cursor: not-allowed; font-weight: bold; }
 
-        /* KOTAK KHAS: Paparan Nama Panjang */
+        /* KOTAK PAPARAN NAMA PENUH (PENTING) */
         .full-name-display {
-            background-color: #eff6ff; /* Biru muda */
-            border: 1px solid #bfdbfe;
-            color: #1e3a8a;
+            width: 100%;
+            background-color: #eff6ff; /* Biru cair */
+            border: 2px solid #bfdbfe;
+            color: #1e40af;
             padding: 15px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px; /* Tulisan besar */
             font-weight: bold;
-            line-height: 1.5;
+            line-height: 1.4;
             margin-bottom: 15px;
-            display: none; /* Hilang jika tiada nama dipilih */
-            word-wrap: break-word; /* Pastikan nama panjang turun ke bawah */
+            display: none; /* Hilang jika tiada nama */
+            box-sizing: border-box;
+            word-wrap: break-word; /* Pastikan nama panjang turun bawah */
+            text-transform: uppercase;
         }
         
         .full-name-label {
             font-size: 11px;
-            text-transform: uppercase;
             color: #64748b;
             margin-bottom: 5px;
             display: block;
+            font-weight: normal;
+            text-transform: none;
         }
 
         button {
             width: 100%; padding: 15px; background-color: #1e3a8a; color: white; border: none;
-            border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;
+            border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 20px;
             box-shadow: 0 4px 6px rgba(30, 58, 138, 0.2);
         }
         button:hover { background-color: #1e40af; transform: translateY(-2px); }
@@ -69,6 +80,7 @@
 
         @media (max-width: 500px) {
             .form-row { flex-direction: column; gap: 10px; }
+            .col-small, .col-half { width: 100%; }
         }
     </style>
 </head>
@@ -93,7 +105,7 @@
         </div>
         <div class="form-row">
             <div class="col-full">
-                <label>Kelas (Auto):</label>
+                <label>Kelas Pengawas:</label>
                 <input type="text" id="kelasPengawas" readonly placeholder="...">
             </div>
         </div>
@@ -102,14 +114,14 @@
         
         <div class="form-row">
             <div class="col-full">
-                <label>Cari Nama Murid (Taip nama):</label>
+                <label>Cari Nama Murid (Taip nama pendek):</label>
                 <input list="listMurid" id="inputMurid" placeholder="Cth: Ahmad..." required autocomplete="off">
                 <datalist id="listMurid"></datalist>
             </div>
         </div>
 
         <div id="wrapperNamaPenuh" class="full-name-display">
-            <span class="full-name-label">Nama Penuh Dipilih:</span>
+            <span class="full-name-label">Nama Penuh Murid:</span>
             <span id="textNamaPenuh"></span>
         </div>
 
@@ -119,7 +131,7 @@
                 <input type="text" id="tahunMurid" readonly placeholder="...">
             </div>
             <div class="col-half">
-                <label>Kelas (Auto):</label>
+                <label>Kelas:</label>
                 <input type="text" id="kelasMurid" readonly placeholder="...">
             </div>
         </div>
